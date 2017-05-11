@@ -20,6 +20,16 @@ read answer
 if echo "$answer" | grep -iq "^y" ;then
 	apt install -y firmware-linux-nonfree
 fi
+echo -n "$(tput setaf 2)$(tput bold)Install extra media codecs?$(tput sgr 0) "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+	apt install -y libavcodec-extra
+fi
+echo -n "$(tput setaf 2)$(tput bold)Install unrar?$(tput sgr 0) "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+	apt install -y unrar
+fi
 echo -n "$(tput setaf 2)$(tput bold)Enable KMS?$(tput sgr 0) "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
@@ -109,14 +119,6 @@ echo -n "$(tput setaf 2)$(tput bold)Install Flatpak support?$(tput sgr 0) "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
 	apt install -y flatpak gnome-software-plugin-flatpak
-	su $(cat user) -c 'flatpak remote-add --user --gpg-import=gnome-sdk.gpg gnome https://sdk.gnome.org/repo/'
-	su $(cat user) -c 'flatpak install --user gnome org.gnome.Platform 3.24'
-	echo -n "$(tput setaf 2)$(tput bold)Download Discord and LibreOffice Flatpak files?$(tput sgr 0) "
-	read answer
-	if echo "$answer" | grep -iq "^y" ;then
-		su $(cat user) -c 'wget http://download.documentfoundation.org/libreoffice/flatpak/latest/LibreOffice.flatpak'
-		su $(cat user) -c 'wget https://dl.tingping.se/flatpak/discord.flatpakref'
-	fi
 fi
 echo -n "$(tput setaf 2)$(tput bold)Install sudo?$(tput sgr 0) "
 read answer
