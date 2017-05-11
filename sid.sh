@@ -26,7 +26,8 @@ if echo "$answer" | grep -iq "^y" ;then
 	echo -n "$(tput setaf 2)$(tput bold)Which GPU?
 1:Intel
 2:AMD/ATI
-3:Nouveau$(tput sgr 0) "
+3:Nouveau
+$(tput sgr 0)"
 	read answer
 	if echo "$answer" | grep -iq "^1" ;then
 	echo "# KMS
@@ -55,7 +56,7 @@ echo -n "$(tput setaf 2)$(tput bold)Which browser?
 1:Firefox-ESR
 2:Firefox
 3:Chromium
-$(tput sgr 0) "
+$(tput sgr 0)"
 read answer
 if echo "$answer" | grep -iq "^3" ;then
 	apt install -y chromium
