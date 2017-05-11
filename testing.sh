@@ -23,6 +23,16 @@ read answer
 if echo "$answer" | grep -iq "^y" ;then
 	apt install -y firmware-linux-nonfree
 fi
+echo -n "$(tput setaf 2)$(tput bold)Install extra media codecs?$(tput sgr 0) "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+	apt install -y libavcodec-extra
+fi
+echo -n "$(tput setaf 2)$(tput bold)Install unrar?$(tput sgr 0) "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+	apt install -y unrar
+fi
 echo -n "$(tput setaf 2)$(tput bold)Enable KMS?$(tput sgr 0) "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
