@@ -1,6 +1,6 @@
 #/bin/sh
-#Scrip with the intention of setting up a custom Debian Sid install from
-#current Testing, may or may not ever actually work
+#Scrip with the intention of setting up a custom Debian Testing or Sid install from
+#current Testing isos, may or may not ever actually work
 echo "$(tput setaf 1)$(tput bold)An Internet connection is REQUIRED$(tput sgr 0)"
 echo "$USER" > user
 if [ $(cat user) = root ]
