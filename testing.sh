@@ -30,7 +30,7 @@ if echo "$answer" | grep -iq "^y" ;then
 1:Intel
 2:AMD/ATI
 3:Nouveau
-$(tput sgr 0) "
+$(tput sgr 0)"
 	read answer
 	if echo "$answer" | grep -iq "^1" ;then
 	echo "# KMS
@@ -59,7 +59,7 @@ echo -n "$(tput setaf 2)$(tput bold)Which browser?
 1:Firefox-ESR
 2:Firefox
 3:Chromium
-$(tput sgr 0) "
+$(tput sgr 0)"
 read answer
 if echo "$answer" | grep -iq "^3" ;then
 	apt install -y chromium
@@ -136,6 +136,5 @@ if echo "$answer" | grep -iq "^y" ;then
 		fi
 	fi
 fi
-rm wget-log*
 echo "$(tput setaf 2)$(tput bold)Setup complete$(tput sgr 0)"
 exit 0
