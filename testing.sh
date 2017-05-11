@@ -64,11 +64,12 @@ if echo "$answer" | grep -iq "^2" ;then
 	apt install -y chromium
 	apt purge -y firefox-esr
 	apt autoremove --purge -y
-	echo -n "$(tput setaf 2)$(tput bold)Install Adobe Flash for Chromium?$(tput sgr 0) "
-	read answer
-	if echo "$answer" | grep -iq "^y" ;then
-		apt install pepperflashplugin-nonfree
-	fi
+	#I don't know if this is gone for good in testing, go ahead and enable it if pepperflashplugin-nonfree shows back up
+	#echo -n "$(tput setaf 2)$(tput bold)Install Adobe Flash for Chromium?$(tput sgr 0) "
+	#read answer
+	#if echo "$answer" | grep -iq "^y" ;then
+	#	apt install pepperflashplugin-nonfree
+	#fi
 	echo -n "$(tput setaf 2)$(tput bold)Install Widevine for Chromium?$(tput sgr 0) "
 	read answer
 	if echo "$answer" | grep -iq "^y" ;then
