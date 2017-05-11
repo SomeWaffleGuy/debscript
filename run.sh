@@ -11,7 +11,7 @@ fi
 echo -n "$(tput setaf 2)$(tput bold)Which Debian version do you wish to run?
 1:Testing
 2:Sid
-$(tput sgr 0) "
+$(tput sgr 0)"
 read answer
 if echo "$answer" | grep -iq "^1" ;then
 	wget https://raw.githubusercontent.com/SomeWaffleGuy/debscript/master/testing.sh
