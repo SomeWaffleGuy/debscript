@@ -57,11 +57,10 @@ nouveau modeset=1" >> /etc/initramfs-tools/modules
 fi
 echo -n "$(tput setaf 2)$(tput bold)Which browser?
 1:Firefox-ESR
-2:Firefox
-3:Chromium
+2:Chromium
 $(tput sgr 0)"
 read answer
-if echo "$answer" | grep -iq "^3" ;then
+if echo "$answer" | grep -iq "^2" ;then
 	apt install -y chromium
 	apt purge -y firefox-esr
 	apt autoremove --purge -y
@@ -80,10 +79,6 @@ if echo "$answer" | grep -iq "^3" ;then
 		rm -rf ~/tmp
 		rm google-chrome-stable_current_amd64.deb
 	fi
-elif echo "$answer" | grep -iq "^2" ;then
-	apt install firefox
-	apt purge -y firefox-esr
-	apt autoremove --purge -y
 fi
 echo -n "$(tput setaf 2)$(tput bold)Include Tor Browser?$(tput sgr 0) "
 read answer
