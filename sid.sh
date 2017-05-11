@@ -109,7 +109,8 @@ read answer
 if echo "$answer" | grep -iq "^y" ;then
 	apt install -y flatpak gnome-software-plugin-flatpak
 	flatpak remote-add --from gnome https://sdk.gnome.org/gnome.flatpakrepo
-	flatpak install --user gnome org.gnome.Platform.Locale 3.24
+	flatpak remote-add --user --gpg-import=gnome-sdk.gpg gnome https://sdk.gnome.org/repo/
+	flatpak install --user gnome org.gnome.Platform 3.24
 	echo -n "$(tput setaf 2)$(tput bold)Download Discord and LibreOffice Flatpak files?$(tput sgr 0) "
 	read answer
 	if echo "$answer" | grep -iq "^y" ;then
