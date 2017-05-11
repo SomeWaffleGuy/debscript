@@ -133,6 +133,5 @@ if echo "$answer" | grep -iq "^y" ;then
 		fi
 	fi
 fi
-rm wget-log*
 echo "$(tput setaf 2)$(tput bold)Setup complete$(tput sgr 0)"
 exit 0
