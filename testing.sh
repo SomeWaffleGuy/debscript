@@ -9,7 +9,6 @@ sleep 3
 	apt install -y apt-transport-https
 echo "$(tput setaf 2)$(tput bold)Modifying sources.list and upgrading$(tput sgr 0)"
 sleep 3
-	rm /etc/apt/sources.list
 	echo "# Debian Testing
 deb https://deb.debian.org/debian/ testing main non-free contrib
 deb-src https://deb.debian.org/debian/ testing main non-free contrib
@@ -20,7 +19,7 @@ deb-src https://deb.debian.org/debian-security testing/updates main contrib non-
 	apt dist-upgrade -y
 echo "$(tput setaf 2)$(tput bold)Installing Arc theme and Moka icons$(tput sgr 0)"
 sleep 3
-	apt install arc-theme moka-icon-theme dmz-cursor-theme
+	apt install -y arc-theme moka-icon-theme dmz-cursor-theme
 	echo "[org/gnome/desktop/interface]
 gtk-theme='Arc-Darker'
 icon-theme='Moka'
