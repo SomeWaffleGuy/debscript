@@ -23,6 +23,7 @@ elif echo "$answer" | grep -iq "^2" ;then
 	chmod +x sid.sh
 	su -c './sid.sh'
 fi
+gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
 gsettings set org.gnome.desktop.interface gtk-theme "Arc-Darker"
 gsettings set org.gnome.desktop.interface icon-theme "Moka"
 gsettings set org.gnome.desktop.interface cursor-theme "DMZ-White"
