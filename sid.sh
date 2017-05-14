@@ -68,7 +68,7 @@ if echo "$answer" | grep -iq "^2" ;then
 	if echo "$answer" | grep -iq "^y" ;then
 		apt install -y unrar zip
 	fi
-	echo -n "$(tput setaf 2)$(tput bold)Enable KMS?$(tput sgr 0) "
+	echo -n "$(tput setaf 2)$(tput bold)Enable KMS (Proprietary Nvidia users skip this)?$(tput sgr 0) "
 	read answer
 	if echo "$answer" | grep -iq "^y" ;then
 		echo -n "$(tput setaf 2)$(tput bold)Which GPU?
@@ -91,14 +91,13 @@ radeon modeset=1" >> /etc/initramfs-tools/modules
 drm
 nouveau modeset=1" >> /etc/initramfs-tools/modules
 		fi
-		echo -n "$(tput setaf 2)$(tput bold)Enable Plymouth?$(tput sgr 0) "
-		read answer
-		if echo "$answer" | grep -iq "^y" ;then
-			apt install -y plymouth plymouth-themes
-			perl -pi -e 's,GRUB_CMDLINE_LINUX_DEFAULT="(.*)"$,GRUB_CMDLINE_LINUX_DEFAULT="$1 splash",' /etc/default/grub
-			update-grub
-			plymouth-set-default-theme -R spinner
-		fi
+	echo -n "$(tput setaf 2)$(tput bold)Enable Plymouth?$(tput sgr 0) "
+	read answer
+	if echo "$answer" | grep -iq "^y" ;then
+		apt install -y plymouth plymouth-themes
+		perl -pi -e 's,GRUB_CMDLINE_LINUX_DEFAULT="(.*)"$,GRUB_CMDLINE_LINUX_DEFAULT="$1 splash",' /etc/default/grub
+		update-grub
+		plymouth-set-default-theme -R spinner
 	fi
 	echo -n "$(tput setaf 2)$(tput bold)Which browser?
 1: Firefox-ESR
