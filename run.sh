@@ -8,6 +8,8 @@ then
 	echo "$(tput setaf 1)$(tput bold)Must run as non-root user$(tput sgr 0)"
 	exit
 fi
+touch show-clock-date
+touch 12-hour
 echo -n "$(tput setaf 2)$(tput bold)Which Debian version do you wish to run?
 1:Testing
 2:Sid
@@ -21,5 +23,18 @@ elif echo "$answer" | grep -iq "^2" ;then
 	wget https://raw.githubusercontent.com/SomeWaffleGuy/debscript/master/sid.sh
 	chmod +x sid.sh
 	su -c './sid.sh'
+fi
+gnome-shell-extension-tool -e user-theme
+gsettings set org.gnome.desktop.interface gtk-theme "Arc-Darker"
+gsettings set org.gnome.desktop.interface icon-theme "Moka"
+gsettings set org.gnome.desktop.interface cursor-theme "DMZ-White"
+gsettings set org.gnome.shell.extensions.user-theme name "Arc-Dark"
+if [ $(cat show-clock-date) = true ]
+then
+gsettings set org.gnome.desktop.interface clock-show-date "true"
+fi
+if [ $(cat 12-hour) = true ]
+then
+gsettings set org.gnome.desktop.interface clock-format "12h"
 fi
 exit 0
