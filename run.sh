@@ -24,10 +24,17 @@ elif echo "$answer" | grep -iq "^2" ;then
 	su -c './sid.sh'
 fi
 gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
+gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
+gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing 'rgba'
 gsettings set org.gnome.desktop.interface gtk-theme "Arc-Darker"
 gsettings set org.gnome.desktop.interface icon-theme "Moka"
 gsettings set org.gnome.desktop.interface cursor-theme "DMZ-White"
 gsettings set org.gnome.shell.extensions.user-theme name "Arc-Dark"
+gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Cantarell Bold 10'
+gsettings set org.gnome.desktop.interface font-name 'Cantarell 10'
+gsettings set org.gnome.desktop.interface document-font-name 'Sans 10'
+gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 10'
+gnome-shell-extension-tool -e user-theme@gnome-shell-extensions.gcamptax.github.com
 if [ $(cat show-clock-date) = true ]
 then
 gsettings set org.gnome.desktop.interface clock-show-date "true"
@@ -37,6 +44,5 @@ then
 gsettings set org.gnome.desktop.interface clock-format "12h"
 fi
 rm show-clock-date 12-hour user
-echo "$(tput setaf 1)$(tput bold)Enable 'User themes' extension via Tweak Tool for matching shell theme$(tput sgr 0)"
 echo "$(tput setaf 1)$(tput bold)Some features won't work until after a reboot$(tput sgr 0)"
 exit 0
