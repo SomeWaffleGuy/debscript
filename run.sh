@@ -24,7 +24,6 @@ elif echo "$answer" | grep -iq "^2" ;then
 	chmod +x sid.sh
 	su -c './sid.sh'
 fi
-gnome-shell-extension-tool -e user-theme
 gsettings set org.gnome.desktop.interface gtk-theme "Arc-Darker"
 gsettings set org.gnome.desktop.interface icon-theme "Moka"
 gsettings set org.gnome.desktop.interface cursor-theme "DMZ-White"
@@ -38,4 +37,6 @@ then
 gsettings set org.gnome.desktop.interface clock-format "12h"
 fi
 rm show-clock-date 12-hour
+echo "$(tput setaf 1)$(tput bold)Enable 'User themes' extension via Tweak Tool for matching shell theme$(tput sgr 0)"
+echo "$(tput setaf 1)$(tput bold)Some features won't work until after a reboot$(tput sgr 0)"
 exit 0
