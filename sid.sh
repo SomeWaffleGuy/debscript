@@ -7,6 +7,8 @@ sleep 3
 echo "$(tput setaf 2)$(tput bold)Enabling HTTPS for APT$(tput sgr 0)"
 sleep 3
 	apt install -y apt-transport-https
+echo "$(tput setaf 2)$(tput bold)Make SURE intall was successful, script will not function otherwise$(tput sgr 0)"
+read -p "$(tput setaf 2)$(tput bold)Press Enter to continue$(tput sgr 0)"
 echo "$(tput setaf 2)$(tput bold)Modifying sources.list and upgrading$(tput sgr 0)"
 sleep 3
 	echo "# Debian Sid
