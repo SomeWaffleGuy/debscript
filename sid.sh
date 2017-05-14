@@ -176,6 +176,7 @@ $(tput sgr 0)"
 elif echo "$answer" | grep -iq "^1" ;then
 	#Install all of the usual things
 	dpkg --add-architecture i386
+	apt update
 	apt install -y firmware-linux-nonfree libavcodec-extra mpv youtube-dl fonts-cabin fonts-comfortaa fonts-croscore fonts-ebgaramond fonts-ebgaramond-extra fonts-font-awesome fonts-freefont-otf fonts-freefont-ttf fonts-gfs-artemisia fonts-gfs-complutum fonts-gfs-didot fonts-gfs-neohellenic fonts-gfs-olga fonts-gfs-solomos fonts-junicode fonts-lmodern fonts-lobster fonts-lobstertwo fonts-noto-hinted fonts-oflb-asana-math fonts-sil-gentiumplus fonts-sil-gentiumplus-compact fonts-stix fonts-texgyre ttf-adf-accanthis ttf-adf-gillius ttf-adf-universalis fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core fonts-roboto unrar zip plymouth plymouth-themes chromium pepperflashplugin-nonfree chromium-widevine torbrowser-launcher apparmor apparmor-profiles apparmor-profiles-extra apparmor-utils steam sudo
 	#Setup Widevine
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
