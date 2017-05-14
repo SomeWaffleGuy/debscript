@@ -19,8 +19,8 @@ deb-src https://deb.debian.org/debian/ sid main non-free contrib" > /etc/apt/sou
 echo "$(tput setaf 2)$(tput bold)Installing Arc theme and Moka icons$(tput sgr 0)"
 sleep 3
 	apt install -y arc-theme moka-icon-theme dmz-cursor-theme libreoffice-style-sifr
+	#The ability to configure GDM is very limited, this at least makes it look somewhat okay
 	echo "[org/gnome/desktop/interface]
-gtk-theme='Arc-Darker'
 icon-theme='Moka'
 cursor-theme='DMZ-White'" >> /etc/gdm3/greeter.dconf-defaults
 	echo "[Icon Theme]
