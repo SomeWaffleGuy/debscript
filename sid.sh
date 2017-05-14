@@ -61,7 +61,7 @@ if echo "$answer" | grep -iq "^2" ;then
 	echo -n "$(tput setaf 2)$(tput bold)Install extra fonts (fixes blank unicode characters)?$(tput sgr 0) "
 	read answer
 	if echo "$answer" | grep -iq "^y" ;then
-		apt install -y fonts-cabin fonts-comfortaa fonts-croscore fonts-ebgaramond fonts-ebgaramond-extra fonts-font-awesome fonts-freefont-otf fonts-freefont-ttf fonts-gfs-artemisia fonts-gfs-complutum fonts-gfs-didot fonts-gfs-neohellenic fonts-gfs-olga fonts-gfs-solomos fonts-junicode fonts-lmodern fonts-lobster fonts-lobstertwo fonts-noto-hinted fonts-oflb-asana-math fonts-sil-gentiumplus fonts-sil-gentiumplus-compact fonts-stix fonts-texgyre ttf-adf-accanthis ttf-adf-gillius ttf-adf-universalis fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core fonts-roboto
+		apt install -y ttf-mscorefonts-installer fonts-cabin fonts-comfortaa fonts-croscore fonts-ebgaramond fonts-ebgaramond-extra fonts-font-awesome fonts-freefont-otf fonts-freefont-ttf fonts-gfs-artemisia fonts-gfs-complutum fonts-gfs-didot fonts-gfs-neohellenic fonts-gfs-olga fonts-gfs-solomos fonts-junicode fonts-lmodern fonts-lobster fonts-lobstertwo fonts-noto-hinted fonts-oflb-asana-math fonts-sil-gentiumplus fonts-sil-gentiumplus-compact fonts-stix fonts-texgyre ttf-adf-accanthis ttf-adf-gillius ttf-adf-universalis fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core fonts-roboto
 	fi
 	echo -n "$(tput setaf 2)$(tput bold)Install unrar and zip?$(tput sgr 0) "
 	read answer
@@ -72,9 +72,9 @@ if echo "$answer" | grep -iq "^2" ;then
 	read answer
 	if echo "$answer" | grep -iq "^y" ;then
 		echo -n "$(tput setaf 2)$(tput bold)Which GPU?
-1:Intel
-2:AMD/ATI
-3:Nouveau
+1: Intel
+2: AMD/ATI
+3: Nvidia (Nouveau only)
 $(tput sgr 0)"
 		read answer
 		if echo "$answer" | grep -iq "^1" ;then
@@ -101,9 +101,9 @@ nouveau modeset=1" >> /etc/initramfs-tools/modules
 		fi
 	fi
 	echo -n "$(tput setaf 2)$(tput bold)Which browser?
-1:Firefox-ESR
-2:Firefox
-3:Chromium
+1: Firefox-ESR
+2: Firefox
+3: Chromium
 $(tput sgr 0)"
 	read answer
 	if echo "$answer" | grep -iq "^3" ;then
@@ -177,7 +177,7 @@ elif echo "$answer" | grep -iq "^1" ;then
 	#Install all of the usual things
 	dpkg --add-architecture i386
 	apt update
-	apt install -y firmware-linux-nonfree libavcodec-extra mpv youtube-dl fonts-cabin fonts-comfortaa fonts-croscore fonts-ebgaramond fonts-ebgaramond-extra fonts-font-awesome fonts-freefont-otf fonts-freefont-ttf fonts-gfs-artemisia fonts-gfs-complutum fonts-gfs-didot fonts-gfs-neohellenic fonts-gfs-olga fonts-gfs-solomos fonts-junicode fonts-lmodern fonts-lobster fonts-lobstertwo fonts-noto-hinted fonts-oflb-asana-math fonts-sil-gentiumplus fonts-sil-gentiumplus-compact fonts-stix fonts-texgyre ttf-adf-accanthis ttf-adf-gillius ttf-adf-universalis fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core fonts-roboto unrar zip plymouth plymouth-themes chromium pepperflashplugin-nonfree chromium-widevine torbrowser-launcher apparmor apparmor-profiles apparmor-profiles-extra apparmor-utils steam sudo
+	apt install -y firmware-linux-nonfree libavcodec-extra mpv youtube-dl ttf-mscorefonts-installer fonts-cabin fonts-comfortaa fonts-croscore fonts-ebgaramond fonts-ebgaramond-extra fonts-font-awesome fonts-freefont-otf fonts-freefont-ttf fonts-gfs-artemisia fonts-gfs-complutum fonts-gfs-didot fonts-gfs-neohellenic fonts-gfs-olga fonts-gfs-solomos fonts-junicode fonts-lmodern fonts-lobster fonts-lobstertwo fonts-noto-hinted fonts-oflb-asana-math fonts-sil-gentiumplus fonts-sil-gentiumplus-compact fonts-stix fonts-texgyre ttf-adf-accanthis ttf-adf-gillius ttf-adf-universalis fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core fonts-roboto unrar zip plymouth plymouth-themes chromium pepperflashplugin-nonfree chromium-widevine torbrowser-launcher apparmor apparmor-profiles apparmor-profiles-extra apparmor-utils steam sudo
 	apt purge firefox-esr
 	apt autoremove --purge -y
 	#Setup Widevine
@@ -188,9 +188,9 @@ elif echo "$answer" | grep -iq "^1" ;then
 	rm google-chrome-stable_current_amd64.deb
 	#Ask for GPU to set up KMS
 	echo -n "$(tput setaf 2)$(tput bold)Which GPU do you have?
-1:Intel
-2:AMD/ATI
-3:Nouveau
+1: Intel
+2: AMD/ATI
+3: Nvidia (Nouveau only)
 $(tput sgr 0)"
 	read answer
 	if echo "$answer" | grep -iq "^1" ;then
