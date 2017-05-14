@@ -2,19 +2,40 @@
 #Sid installer/customizer
 echo "$(tput setaf 2)$(tput bold)Uninstalling useless GNOME parts$(tput sgr 0)"
 sleep 3
-	apt purge -y gnome-maps gnome-music gnome-photos gnome-games gnome-documents gnome-weather gnome-dictionary polari libreoffice libreoffice-*
+	apt purge -y gnome-maps gnome-music gnome-photos gnome-games gnome-documents gnome-weather gnome-dictionary polari
 	apt autoremove --purge -y
 echo "$(tput setaf 2)$(tput bold)Enabling HTTPS for APT$(tput sgr 0)"
 sleep 3
 	apt install -y apt-transport-https
 echo "$(tput setaf 2)$(tput bold)Modifying sources.list and upgrading$(tput sgr 0)"
 sleep 3
-	rm /etc/apt/sources.list
 	echo "# Debian Sid
 deb https://deb.debian.org/debian/ sid main non-free contrib
 deb-src https://deb.debian.org/debian/ sid main non-free contrib" > /etc/apt/sources.list
 	apt update
 	apt dist-upgrade -y
+echo "$(tput setaf 2)$(tput bold)Installing Arc theme and Moka icons$(tput sgr 0)"
+sleep 3
+	apt install arc-theme moka-icon-theme dmz-cursor-theme
+	echo "[org/gnome/desktop/interface]
+gtk-theme='Arc-Darker'
+icon-theme='Moka'
+cursor-theme='DMZ-White'" >> /etc/gdm3/greeter.dconf-defaults
+	echo "[Icon Theme]
+Inherits=DMZ-White" > /usr/share/icons/default/index.theme
+echo -n "$(tput setaf 2)$(tput bold)Show date on clock?$(tput sgr 0) "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+	echo "clock-show-date='true'" >> /etc/gdm3/greeter.dconf-defaults
+	echo "true" > show-clock-date
+fi
+echo -n "$(tput setaf 2)$(tput bold)Use 12 hour time?$(tput sgr 0) "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+	echo "clock-format='12h'" >> /etc/gdm3/greeter.dconf-defaults
+	echo "true" > 12-hour
+fi
+dpkg-reconfigure gdm3
 echo -n "$(tput setaf 2)$(tput bold)Install Non-Free Firmware?$(tput sgr 0) "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
