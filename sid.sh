@@ -18,7 +18,7 @@ deb-src https://deb.debian.org/debian/ sid main non-free contrib" > /etc/apt/sou
 	apt dist-upgrade -y
 echo "$(tput setaf 2)$(tput bold)Installing Arc theme and Moka icons$(tput sgr 0)"
 sleep 3
-	apt install -y arc-theme moka-icon-theme dmz-cursor-theme
+	apt install -y arc-theme moka-icon-theme dmz-cursor-theme libreoffice-style-sifr
 	echo "[org/gnome/desktop/interface]
 gtk-theme='Arc-Darker'
 icon-theme='Moka'
