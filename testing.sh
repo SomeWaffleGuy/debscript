@@ -28,10 +28,9 @@ icon-theme='Moka'
 cursor-theme='DMZ-White'" >> /etc/gdm3/greeter.dconf-defaults
 	echo "[Icon Theme]
 Inherits=DMZ-White" > /usr/share/icons/default/index.theme
-echo -n "$(tput setaf 2)$(tput bold)Show date on clock?$(tput sgr 0) "
+echo -n "$(tput setaf 2)$(tput bold)Show date on clock (does not work on GDM)?$(tput sgr 0) "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
-	echo "clock-show-date='true'" >> /etc/gdm3/greeter.dconf-defaults
 	echo "true" > show-clock-date
 fi
 echo -n "$(tput setaf 2)$(tput bold)Use 12 hour time?$(tput sgr 0) "
