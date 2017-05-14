@@ -50,6 +50,11 @@ read answer
 if echo "$answer" | grep -iq "^y" ;then
 	apt install -y libavcodec-extra
 fi
+echo -n "$(tput setaf 2)$(tput bold)Install mpv?$(tput sgr 0) "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+	apt install -y mpv youtube-dl
+fi
 echo -n "$(tput setaf 2)$(tput bold)Install extra fonts (fixes blank unicode characters)?$(tput sgr 0) "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
