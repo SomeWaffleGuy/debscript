@@ -194,8 +194,8 @@ elif echo "$answer" | grep -iq "^1" ;then
 	echo -n "$(tput setaf 2)$(tput bold)Which GPU do you have?
 1: Intel
 2: AMD/ATI
-3: Nvidia (Nouveau only)
-4: Proprietary Nvidia
+3: Nvidia (Nouveau)
+4: Nvidia (Proprietary)
 $(tput sgr 0)"
 	read answer
 	if echo "$answer" | grep -iq "^1" ;then
