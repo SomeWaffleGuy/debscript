@@ -75,9 +75,9 @@ if echo "$answer" | grep -iq "^2" ;then
 	read answer
 	if echo "$answer" | grep -iq "^y" ;then
 		echo -n "$(tput setaf 2)$(tput bold)Which GPU?
-1:Intel
-2:AMD/ATI
-3:Nouveau
+1: Intel
+2: AMD/ATI
+3: Nvidia (Nouveau only)
 $(tput sgr 0)"
 		read answer
 		if echo "$answer" | grep -iq "^1" ;then
@@ -104,12 +104,11 @@ nouveau modeset=1" >> /etc/initramfs-tools/modules
 		fi
 	fi
 	echo -n "$(tput setaf 2)$(tput bold)Which browser?
-1:Firefox-ESR
-2:Firefox
-3:Chromium
+1: Firefox-ESR
+2: Chromium
 $(tput sgr 0)"
 	read answer
-	if echo "$answer" | grep -iq "^3" ;then
+	if echo "$answer" | grep -iq "^2" ;then
 		apt install -y chromium
 		apt purge -y firefox-esr
 		apt autoremove --purge -y
@@ -129,10 +128,6 @@ $(tput sgr 0)"
 			rm -rf ~/tmp
 			rm google-chrome-stable_current_amd64.deb
 		fi
-	elif echo "$answer" | grep -iq "^2" ;then
-		apt install firefox
-		apt purge -y firefox-esr
-		apt autoremove --purge -y
 	fi
 	echo -n "$(tput setaf 2)$(tput bold)Include Tor Browser?$(tput sgr 0) "
 	read answer
@@ -192,9 +187,9 @@ elif echo "$answer" | grep -iq "^1" ;then
 	rm google-chrome-stable_current_amd64.deb
 	#Ask for GPU to set up KMS
 	echo -n "$(tput setaf 2)$(tput bold)Which GPU do you have?
-1:Intel
-2:AMD/ATI
-3:Nouveau
+1: Intel
+2: AMD/ATI
+3: Nvidia (Nouveau only)
 $(tput sgr 0)"
 	read answer
 	if echo "$answer" | grep -iq "^1" ;then
