@@ -39,6 +39,7 @@ if echo "$answer" | grep -iq "^y" ;then
 	echo "clock-format='12h'" >> /etc/gdm3/greeter.dconf-defaults
 	echo "true" > 12-hour
 fi
+dpkg-reconfigure gdm3
 echo -n "$(tput setaf 2)$(tput bold)Install Non-Free Firmware?$(tput sgr 0) "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
