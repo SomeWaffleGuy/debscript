@@ -47,15 +47,20 @@ read answer
 if echo "$answer" | grep -iq "^y" ;then
 	apt install -y libavcodec-extra
 fi
+echo -n "$(tput setaf 2)$(tput bold)Install mpv?$(tput sgr 0) "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+	apt install -y mpv youtube-dl
+fi
 echo -n "$(tput setaf 2)$(tput bold)Install extra fonts (fixes blank unicode characters)?$(tput sgr 0) "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
 	apt install -y fonts-cabin fonts-comfortaa fonts-croscore fonts-ebgaramond fonts-ebgaramond-extra fonts-font-awesome fonts-freefont-otf fonts-freefont-ttf fonts-gfs-artemisia fonts-gfs-complutum fonts-gfs-didot fonts-gfs-neohellenic fonts-gfs-olga fonts-gfs-solomos fonts-junicode fonts-lmodern fonts-lobster fonts-lobstertwo fonts-noto-hinted fonts-oflb-asana-math fonts-sil-gentiumplus fonts-sil-gentiumplus-compact fonts-stix fonts-texgyre ttf-adf-accanthis ttf-adf-gillius ttf-adf-universalis fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core fonts-roboto
 fi
-echo -n "$(tput setaf 2)$(tput bold)Install unrar?$(tput sgr 0) "
+echo -n "$(tput setaf 2)$(tput bold)Install unrar and zip?$(tput sgr 0) "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
-	apt install -y unrar
+	apt install -y unrar zip
 fi
 echo -n "$(tput setaf 2)$(tput bold)Enable KMS?$(tput sgr 0) "
 read answer
