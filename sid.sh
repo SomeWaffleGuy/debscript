@@ -39,7 +39,8 @@ fi
 dpkg-reconfigure gdm3
 echo -n "$(tput setaf 2)$(tput bold)Select Install options
 1: Typical Install
-2: Custom Install (Select options)$(tput sgr 0) "
+2: Custom Install
+$(tput sgr 0) "
 read answer
 if echo "$answer" | grep -iq "^2" ;then
 	echo -n "$(tput setaf 2)$(tput bold)Install Non-Free Firmware?$(tput sgr 0) "
