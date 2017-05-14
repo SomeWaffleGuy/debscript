@@ -37,4 +37,5 @@ if [ $(cat 12-hour) = true ]
 then
 gsettings set org.gnome.desktop.interface clock-format "12h"
 fi
+rm show-clock-date 12-hour
 exit 0
