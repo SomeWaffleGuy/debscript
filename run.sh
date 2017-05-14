@@ -10,8 +10,8 @@ fi
 touch show-clock-date
 touch 12-hour
 echo -n "$(tput setaf 2)$(tput bold)Which Debian version do you wish to run?
-1:Testing
-2:Sid
+1: Testing
+2: Sid
 $(tput sgr 0)"
 read answer
 if echo "$answer" | grep -iq "^1" ;then
