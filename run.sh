@@ -34,7 +34,6 @@ gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Cantarell Bold 10'
 gsettings set org.gnome.desktop.interface font-name 'Cantarell 10'
 gsettings set org.gnome.desktop.interface document-font-name 'Sans 10'
 gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 10'
-gnome-shell-extension-tool -e user-theme@gnome-shell-extensions.gcamptax.github.com
 if [ $(cat show-clock-date) = true ]
 then
 gsettings set org.gnome.desktop.interface clock-show-date "true"
@@ -44,5 +43,6 @@ then
 gsettings set org.gnome.desktop.interface clock-format "12h"
 fi
 rm show-clock-date 12-hour user
+echo "$(tput setaf 1)$(tput bold)Enable 'User themes' in Tweak Tool for matching shell theme$(tput sgr 0)"
 echo "$(tput setaf 1)$(tput bold)Some features won't work until after a reboot$(tput sgr 0)"
 exit 0
