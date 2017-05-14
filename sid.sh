@@ -96,6 +96,7 @@ radeon modeset=1" >> /etc/initramfs-tools/modules
 drm
 nouveau modeset=1" >> /etc/initramfs-tools/modules
 		fi
+	fi
 	echo -n "$(tput setaf 2)$(tput bold)Enable Plymouth?$(tput sgr 0) "
 	read answer
 	if echo "$answer" | grep -iq "^y" ;then
