@@ -18,10 +18,6 @@ deb-src https://deb.debian.org/debian-security testing/updates main contrib non-
 echo "$(tput setaf 2)$(tput bold)Installing Arc theme and Moka icons$(tput sgr 0)"
 sleep 3
 	apt install -y arc-theme moka-icon-theme breeze-cursor-theme libreoffice libreoffice-gnome libreoffice-style-sifr budgie-desktop lightdm gnome-terminal gnome-software
-	#The ability to configure GDM is very limited, this at least makes it look somewhat okay
-	echo "[org/gnome/desktop/interface]
-icon-theme='Moka'
-cursor-theme='Breeze_cursor'" >> /etc/gdm3/greeter.dconf-defaults
 	echo "[Icon Theme]
 Inherits=Breeze_cursor" > /usr/share/icons/default/index.theme
 echo -n "$(tput setaf 2)$(tput bold)Select Install options
