@@ -19,7 +19,7 @@ echo "$(tput setaf 2)$(tput bold)Installing Arc theme and Moka icons$(tput sgr 0
 sleep 3
 	apt install -y arc-theme moka-icon-theme breeze-cursor-theme libreoffice libreoffice-gnome libreoffice-style-sifr budgie-desktop lightdm gnome-terminal gnome-software
 	echo "[Icon Theme]
-Inherits=Breeze_cursor" > /usr/share/icons/default/index.theme
+Inherits=breeze_cursors" > /usr/share/icons/default/index.theme
 echo -n "$(tput setaf 2)$(tput bold)Select Install options
 1: Typical Install
 2: Custom Install
