@@ -1,9 +1,5 @@
 #/bin/sh
 #Testing installer/customizer
-echo "$(tput setaf 2)$(tput bold)Uninstalling useless GNOME parts$(tput sgr 0)"
-sleep 3
-	apt purge -y gnome-maps gnome-music gnome-photos gnome-games gnome-documents gnome-weather gnome-dictionary polari
-	apt autoremove --purge -y
 echo "$(tput setaf 2)$(tput bold)Enabling HTTPS for APT$(tput sgr 0)"
 sleep 3
 	apt install -y apt-transport-https
@@ -21,25 +17,13 @@ deb-src https://deb.debian.org/debian-security testing/updates main contrib non-
 	apt dist-upgrade -y
 echo "$(tput setaf 2)$(tput bold)Installing Arc theme and Moka icons$(tput sgr 0)"
 sleep 3
-	apt install -y arc-theme moka-icon-theme dmz-cursor-theme libreoffice-style-sifr
+	apt install -y arc-theme moka-icon-theme breeze-cursor-theme libreoffice libreoffice-gnome libreoffice-style-sifr budgie-desktop lightdm gnome-terminal gnome-software
 	#The ability to configure GDM is very limited, this at least makes it look somewhat okay
 	echo "[org/gnome/desktop/interface]
 icon-theme='Moka'
-cursor-theme='DMZ-White'" >> /etc/gdm3/greeter.dconf-defaults
+cursor-theme='Breeze_cursor'" >> /etc/gdm3/greeter.dconf-defaults
 	echo "[Icon Theme]
-Inherits=DMZ-White" > /usr/share/icons/default/index.theme
-echo -n "$(tput setaf 2)$(tput bold)Show date on clock (does not work on GDM)?$(tput sgr 0) "
-read answer
-if echo "$answer" | grep -iq "^y" ;then
-	echo "true" > show-clock-date
-fi
-echo -n "$(tput setaf 2)$(tput bold)Use 12 hour time?$(tput sgr 0) "
-read answer
-if echo "$answer" | grep -iq "^y" ;then
-	echo "clock-format='12h'" >> /etc/gdm3/greeter.dconf-defaults
-	echo "true" > 12-hour
-fi
-dpkg-reconfigure gdm3
+Inherits=Breeze_cursor" > /usr/share/icons/default/index.theme
 echo -n "$(tput setaf 2)$(tput bold)Select Install options
 1: Typical Install
 2: Custom Install
@@ -106,7 +90,7 @@ nouveau modeset=1" >> /etc/initramfs-tools/modules
 		apt install -y plymouth plymouth-themes
 		perl -pi -e 's,GRUB_CMDLINE_LINUX_DEFAULT="(.*)"$,GRUB_CMDLINE_LINUX_DEFAULT="$1 splash",' /etc/default/grub
 		update-grub
-		plymouth-set-default-theme -R spinner
+		plymouth-set-default-theme -R joy
 	fi
 	echo -n "$(tput setaf 2)$(tput bold)Which browser?
 1: Firefox-ESR
@@ -162,21 +146,6 @@ $(tput sgr 0)"
 	if echo "$answer" | grep -iq "^y" ;then
 		apt install -y flatpak gnome-software-plugin-flatpak
 	fi
-	echo -n "$(tput setaf 2)$(tput bold)Install sudo?$(tput sgr 0) "
-	read answer
-	if echo "$answer" | grep -iq "^y" ;then
-		apt install -y sudo
-		echo -n "$(tput setaf 2)$(tput bold)Add $(cat user) to sudo group?$(tput sgr 0) "
-		read answer
-		if echo "$answer" | grep -iq "^y" ;then
-			usermod -a -G sudo $(cat user)
-			echo -n "$(tput setaf 2)$(tput bold)Disable root password?$(tput sgr 0) "
-			read answer
-			if echo "$answer" | grep -iq "^y" ;then
-				passwd -l root
-			fi
-		fi
-	fi
 elif echo "$answer" | grep -iq "^1" ;then
 	#Install all of the usual things
 	dpkg --add-architecture i386
@@ -196,6 +165,7 @@ elif echo "$answer" | grep -iq "^1" ;then
 2: AMD/ATI
 3: Nvidia (Nouveau)
 4: Nvidia (Proprietary)
+5: Other (will have to set up manually)
 $(tput sgr 0)"
 	read answer
 	if echo "$answer" | grep -iq "^1" ;then
@@ -217,9 +187,6 @@ nouveau modeset=1" >> /etc/initramfs-tools/modules
 	#Edit GRUB as needed, set Plymouth theme
 	perl -pi -e 's,GRUB_CMDLINE_LINUX_DEFAULT="(.*)"$,GRUB_CMDLINE_LINUX_DEFAULT="$1 splash",' /etc/default/grub
 	perl -pi -e 's,GRUB_CMDLINE_LINUX="(.*)"$,GRUB_CMDLINE_LINUX="$1 apparmor=1 security=apparmor",' /etc/default/grub
-	plymouth-set-default-theme -R spinner
+	plymouth-set-default-theme -R joy
 	update-grub
-	#Add user to sudo group and disable root
-	usermod -a -G sudo $(cat user)
-	passwd -l root
 fi
