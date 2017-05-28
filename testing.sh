@@ -20,6 +20,12 @@ sleep 3
 	apt install -y arc-theme moka-icon-theme breeze-cursor-theme libreoffice libreoffice-gnome libreoffice-style-sifr budgie-desktop lightdm gnome-terminal gnome-software
 	echo "[Icon Theme]
 Inherits=breeze_cursors" > /usr/share/icons/default/index.theme
+	echo "[SeatDefaults]
+greeter-hide-users=false" > /usr/share/lightdm/lightdm.conf.d/01_my.conf
+	echo "theme-name=Arc-Darker
+icon-theme-name=Moka
+font-name=Liberation Sans 10
+clock-format=%l:%M %p" >> /etc/lightdm/lightdm-gtk-greeter.conf
 echo -n "$(tput setaf 2)$(tput bold)Select Install options
 1: Typical Install
 2: Custom Install
@@ -161,7 +167,6 @@ elif echo "$answer" | grep -iq "^1" ;then
 2: AMD/ATI
 3: Nvidia (Nouveau)
 4: Nvidia (Proprietary)
-5: Other (will have to set up manually)
 $(tput sgr 0)"
 	read answer
 	if echo "$answer" | grep -iq "^1" ;then
