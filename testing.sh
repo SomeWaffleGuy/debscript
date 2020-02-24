@@ -15,17 +15,19 @@ deb https://deb.debian.org/debian-security testing/updates main contrib non-free
 deb-src https://deb.debian.org/debian-security testing/updates main contrib non-free" > /etc/apt/sources.list
 	apt update
 	apt dist-upgrade -y
-echo "$(tput setaf 2)$(tput bold)Installing Arc theme and Moka icons$(tput sgr 0)"
 sleep 3
-	apt install -y arc-theme moka-icon-theme breeze-cursor-theme libreoffice libreoffice-gnome libreoffice-style-sifr budgie-desktop lightdm gnome-terminal gnome-software
-	echo "[Icon Theme]
-Inherits=breeze_cursors" > /usr/share/icons/default/index.theme
-	echo "[SeatDefaults]
-greeter-hide-users=false" > /usr/share/lightdm/lightdm.conf.d/01_my.conf
-	echo "theme-name=Arc-Darker
-icon-theme-name=Moka
-font-name=Liberation Sans 10
-clock-format=%l:%M %p" >> /etc/lightdm/lightdm-gtk-greeter.conf
+echo -n "$(tput setaf 2)$(tput bold)Show date on clock (does not work on GDM)?$(tput sgr 0) "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+	echo "true" > show-clock-date
+fi
+echo -n "$(tput setaf 2)$(tput bold)Use 12 hour time?$(tput sgr 0) "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+	echo "clock-format='12h'" >> /etc/gdm3/greeter.dconf-defaults
+	echo "true" > 12-hour
+fi
+dpkg-reconfigure gdm3
 echo -n "$(tput setaf 2)$(tput bold)Select Install options
 1: Typical Install
 2: Custom Install
@@ -50,7 +52,7 @@ if echo "$answer" | grep -iq "^2" ;then
 	echo -n "$(tput setaf 2)$(tput bold)Install extra fonts (fixes blank unicode characters)?$(tput sgr 0) "
 	read answer
 	if echo "$answer" | grep -iq "^y" ;then
-		apt install -y ttf-mscorefonts-installer fonts-cabin fonts-comfortaa fonts-croscore fonts-ebgaramond fonts-ebgaramond-extra fonts-font-awesome fonts-freefont-otf fonts-freefont-ttf fonts-gfs-artemisia fonts-gfs-complutum fonts-gfs-didot fonts-gfs-neohellenic fonts-gfs-olga fonts-gfs-solomos fonts-junicode fonts-lmodern fonts-lobster fonts-lobstertwo fonts-noto-hinted fonts-oflb-asana-math fonts-sil-gentiumplus fonts-sil-gentiumplus-compact fonts-stix fonts-texgyre ttf-adf-accanthis ttf-adf-gillius ttf-adf-universalis fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core fonts-roboto
+		apt install -y ttf-mscorefonts-installer fonts-cabin fonts-comfortaa fonts-croscore fonts-ebgaramond fonts-ebgaramond-extra fonts-font-awesome fonts-freefont-otf fonts-freefont-ttf fonts-gfs-artemisia fonts-gfs-complutum fonts-gfs-didot fonts-gfs-neohellenic fonts-gfs-olga fonts-gfs-solomos fonts-junicode fonts-lmodern fonts-lobster fonts-lobstertwo fonts-noto-hinted fonts-oflb-asana-math fonts-sil-gentiumplus fonts-sil-gentiumplus-compact fonts-stix fonts-texgyre ttf-adf-accanthis ttf-adf-gillius ttf-adf-universalis fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core fonts-roboto fonts-symbola
 	fi
 	echo -n "$(tput setaf 2)$(tput bold)Install unrar and zip?$(tput sgr 0) "
 	read answer
@@ -92,23 +94,23 @@ nouveau modeset=1" >> /etc/initramfs-tools/modules
 		apt install -y plymouth plymouth-themes
 		perl -pi -e 's,GRUB_CMDLINE_LINUX_DEFAULT="(.*)"$,GRUB_CMDLINE_LINUX_DEFAULT="$1 splash",' /etc/default/grub
 		update-grub
-		plymouth-set-default-theme -R joy
+		plymouth-set-default-theme -R futureprototype
 	fi
 	echo -n "$(tput setaf 2)$(tput bold)Which browser?
 1: Firefox-ESR
-2: Chromium
+2: Firefox
+3: Chromium
 $(tput sgr 0)"
 	read answer
-	if echo "$answer" | grep -iq "^2" ;then
+	if echo "$answer" | grep -iq "^3" ;then
 		apt install -y chromium
 		apt purge -y firefox-esr
 		apt autoremove --purge -y
-		#Not available in current Testing, uncomment if it comes back
-		#echo -n "$(tput setaf 2)$(tput bold)Install Adobe Flash for Chromium?$(tput sgr 0) "
-		#read answer
-		#if echo "$answer" | grep -iq "^y" ;then
-		#	apt install pepperflashplugin-nonfree
-		#fi
+		echo -n "$(tput setaf 2)$(tput bold)Install Adobe Flash for Chromium?$(tput sgr 0) "
+		read answer
+		if echo "$answer" | grep -iq "^y" ;then
+			apt install pepperflashplugin-nonfree
+		fi
 		echo -n "$(tput setaf 2)$(tput bold)Install Widevine for Chromium?$(tput sgr 0) "
 		read answer
 		if echo "$answer" | grep -iq "^y" ;then
@@ -119,6 +121,10 @@ $(tput sgr 0)"
 			rm -rf ~/tmp
 			rm google-chrome-stable_current_amd64.deb
 		fi
+	elif echo "$answer" | grep -iq "^2" ;then
+		apt install firefox
+		apt purge -y firefox-esr
+		apt autoremove --purge -y
 	fi
 	echo -n "$(tput setaf 2)$(tput bold)Include Tor Browser?$(tput sgr 0) "
 	read answer
@@ -152,8 +158,8 @@ elif echo "$answer" | grep -iq "^1" ;then
 	#Install all of the usual things
 	dpkg --add-architecture i386
 	apt update
-	apt install -y firmware-linux-nonfree libavcodec-extra mpv youtube-dl ttf-mscorefonts-installer fonts-cabin fonts-comfortaa fonts-croscore fonts-ebgaramond fonts-ebgaramond-extra fonts-font-awesome fonts-freefont-otf fonts-freefont-ttf fonts-gfs-artemisia fonts-gfs-complutum fonts-gfs-didot fonts-gfs-neohellenic fonts-gfs-olga fonts-gfs-solomos fonts-junicode fonts-lmodern fonts-lobster fonts-lobstertwo fonts-noto-hinted fonts-oflb-asana-math fonts-sil-gentiumplus fonts-sil-gentiumplus-compact fonts-stix fonts-texgyre ttf-adf-accanthis ttf-adf-gillius ttf-adf-universalis fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core fonts-roboto unrar zip plymouth plymouth-themes chromium chromium-widevine torbrowser-launcher apparmor apparmor-profiles apparmor-profiles-extra apparmor-utils steam sudo
-	apt purge -y firefox-esr
+	apt install -y firmware-linux-nonfree libavcodec-extra mpv youtube-dl ttf-mscorefonts-installer fonts-cabin fonts-comfortaa fonts-croscore fonts-ebgaramond fonts-ebgaramond-extra fonts-font-awesome fonts-freefont-otf fonts-freefont-ttf fonts-gfs-artemisia fonts-gfs-complutum fonts-gfs-didot fonts-gfs-neohellenic fonts-gfs-olga fonts-gfs-solomos fonts-junicode fonts-lmodern fonts-lobster fonts-lobstertwo fonts-noto-hinted fonts-oflb-asana-math fonts-sil-gentiumplus fonts-sil-gentiumplus-compact fonts-stix fonts-texgyre ttf-adf-accanthis ttf-adf-gillius ttf-adf-universalis fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core fonts-roboto fonts-symbola unrar zip plymouth plymouth-themes chromium pepperflashplugin-nonfree chromium-widevine torbrowser-launcher apparmor apparmor-profiles apparmor-profiles-extra apparmor-utils steam sudo
+	apt purge firefox-esr
 	apt autoremove --purge -y
 	#Setup Widevine
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -188,6 +194,7 @@ nouveau modeset=1" >> /etc/initramfs-tools/modules
 	#Edit GRUB as needed, set Plymouth theme
 	perl -pi -e 's,GRUB_CMDLINE_LINUX_DEFAULT="(.*)"$,GRUB_CMDLINE_LINUX_DEFAULT="$1 splash",' /etc/default/grub
 	perl -pi -e 's,GRUB_CMDLINE_LINUX="(.*)"$,GRUB_CMDLINE_LINUX="$1 apparmor=1 security=apparmor",' /etc/default/grub
-	plymouth-set-default-theme -R joy
+	plymouth-set-default-theme -R futureprototype
 	update-grub
 fi
+exit 0
