@@ -126,11 +126,6 @@ $(tput sgr 0)"
 		apt purge -y firefox-esr
 		apt autoremove --purge -y
 	fi
-	echo -n "$(tput setaf 2)$(tput bold)Include Tor Browser?$(tput sgr 0) "
-	read answer
-	if echo "$answer" | grep -iq "^y" ;then
-		apt install -y torbrowser-launcher
-	fi
 	echo -n "$(tput setaf 2)$(tput bold)Install AppArmor and Profiles?$(tput sgr 0) "
 	read answer
 	if echo "$answer" | grep -iq "^y" ;then
