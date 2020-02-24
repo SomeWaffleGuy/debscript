@@ -16,15 +16,7 @@ deb https://deb.debian.org/debian/ sid main non-free contrib
 deb-src https://deb.debian.org/debian/ sid main non-free contrib" > /etc/apt/sources.list
 	apt update
 	apt dist-upgrade -y
-echo "$(tput setaf 2)$(tput bold)Installing Arc theme and Moka icons$(tput sgr 0)"
 sleep 3
-	apt install -y arc-theme moka-icon-theme dmz-cursor-theme libreoffice-style-sifr
-	#The ability to configure GDM is very limited, this at least makes it look somewhat okay
-	echo "[org/gnome/desktop/interface]
-icon-theme='Moka'
-cursor-theme='DMZ-White'" >> /etc/gdm3/greeter.dconf-defaults
-	echo "[Icon Theme]
-Inherits=DMZ-White" > /usr/share/icons/default/index.theme
 echo -n "$(tput setaf 2)$(tput bold)Show date on clock (does not work on GDM)?$(tput sgr 0) "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
@@ -61,7 +53,7 @@ if echo "$answer" | grep -iq "^2" ;then
 	echo -n "$(tput setaf 2)$(tput bold)Install extra fonts (fixes blank unicode characters)?$(tput sgr 0) "
 	read answer
 	if echo "$answer" | grep -iq "^y" ;then
-		apt install -y ttf-mscorefonts-installer fonts-cabin fonts-comfortaa fonts-croscore fonts-ebgaramond fonts-ebgaramond-extra fonts-font-awesome fonts-freefont-otf fonts-freefont-ttf fonts-gfs-artemisia fonts-gfs-complutum fonts-gfs-didot fonts-gfs-neohellenic fonts-gfs-olga fonts-gfs-solomos fonts-junicode fonts-lmodern fonts-lobster fonts-lobstertwo fonts-noto-hinted fonts-oflb-asana-math fonts-sil-gentiumplus fonts-sil-gentiumplus-compact fonts-stix fonts-texgyre ttf-adf-accanthis ttf-adf-gillius ttf-adf-universalis fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core fonts-roboto
+		apt install -y ttf-mscorefonts-installer fonts-cabin fonts-comfortaa fonts-croscore fonts-ebgaramond fonts-ebgaramond-extra fonts-font-awesome fonts-freefont-otf fonts-freefont-ttf fonts-gfs-artemisia fonts-gfs-complutum fonts-gfs-didot fonts-gfs-neohellenic fonts-gfs-olga fonts-gfs-solomos fonts-junicode fonts-lmodern fonts-lobster fonts-lobstertwo fonts-noto-hinted fonts-oflb-asana-math fonts-sil-gentiumplus fonts-sil-gentiumplus-compact fonts-stix fonts-texgyre ttf-adf-accanthis ttf-adf-gillius ttf-adf-universalis fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core fonts-roboto fonts-symbola
 	fi
 	echo -n "$(tput setaf 2)$(tput bold)Install unrar and zip?$(tput sgr 0) "
 	read answer
@@ -103,7 +95,7 @@ nouveau modeset=1" >> /etc/initramfs-tools/modules
 		apt install -y plymouth plymouth-themes
 		perl -pi -e 's,GRUB_CMDLINE_LINUX_DEFAULT="(.*)"$,GRUB_CMDLINE_LINUX_DEFAULT="$1 splash",' /etc/default/grub
 		update-grub
-		plymouth-set-default-theme -R spinner
+		plymouth-set-default-theme -R futureprototype
 	fi
 	echo -n "$(tput setaf 2)$(tput bold)Which browser?
 1: Firefox-ESR
@@ -163,26 +155,11 @@ $(tput sgr 0)"
 	if echo "$answer" | grep -iq "^y" ;then
 		apt install -y flatpak gnome-software-plugin-flatpak
 	fi
-	echo -n "$(tput setaf 2)$(tput bold)Install sudo?$(tput sgr 0) "
-	read answer
-	if echo "$answer" | grep -iq "^y" ;then
-		apt install -y sudo
-		echo -n "$(tput setaf 2)$(tput bold)Add $(cat user) to sudo group?$(tput sgr 0) "
-		read answer
-		if echo "$answer" | grep -iq "^y" ;then
-			usermod -a -G sudo $(cat user)
-			echo -n "$(tput setaf 2)$(tput bold)Disable root password?$(tput sgr 0) "
-			read answer
-			if echo "$answer" | grep -iq "^y" ;then
-				passwd -l root
-			fi
-		fi
-	fi
 elif echo "$answer" | grep -iq "^1" ;then
 	#Install all of the usual things
 	dpkg --add-architecture i386
 	apt update
-	apt install -y firmware-linux-nonfree libavcodec-extra mpv youtube-dl ttf-mscorefonts-installer fonts-cabin fonts-comfortaa fonts-croscore fonts-ebgaramond fonts-ebgaramond-extra fonts-font-awesome fonts-freefont-otf fonts-freefont-ttf fonts-gfs-artemisia fonts-gfs-complutum fonts-gfs-didot fonts-gfs-neohellenic fonts-gfs-olga fonts-gfs-solomos fonts-junicode fonts-lmodern fonts-lobster fonts-lobstertwo fonts-noto-hinted fonts-oflb-asana-math fonts-sil-gentiumplus fonts-sil-gentiumplus-compact fonts-stix fonts-texgyre ttf-adf-accanthis ttf-adf-gillius ttf-adf-universalis fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core fonts-roboto unrar zip plymouth plymouth-themes chromium pepperflashplugin-nonfree chromium-widevine torbrowser-launcher apparmor apparmor-profiles apparmor-profiles-extra apparmor-utils steam sudo
+	apt install -y firmware-linux-nonfree libavcodec-extra mpv youtube-dl ttf-mscorefonts-installer fonts-cabin fonts-comfortaa fonts-croscore fonts-ebgaramond fonts-ebgaramond-extra fonts-font-awesome fonts-freefont-otf fonts-freefont-ttf fonts-gfs-artemisia fonts-gfs-complutum fonts-gfs-didot fonts-gfs-neohellenic fonts-gfs-olga fonts-gfs-solomos fonts-junicode fonts-lmodern fonts-lobster fonts-lobstertwo fonts-noto-hinted fonts-oflb-asana-math fonts-sil-gentiumplus fonts-sil-gentiumplus-compact fonts-stix fonts-texgyre ttf-adf-accanthis ttf-adf-gillius ttf-adf-universalis fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core fonts-roboto fonts-symbola unrar zip plymouth plymouth-themes chromium pepperflashplugin-nonfree chromium-widevine torbrowser-launcher apparmor apparmor-profiles apparmor-profiles-extra apparmor-utils steam sudo
 	apt purge firefox-esr
 	apt autoremove --purge -y
 	#Setup Widevine
@@ -218,10 +195,7 @@ nouveau modeset=1" >> /etc/initramfs-tools/modules
 	#Edit GRUB as needed, set Plymouth theme
 	perl -pi -e 's,GRUB_CMDLINE_LINUX_DEFAULT="(.*)"$,GRUB_CMDLINE_LINUX_DEFAULT="$1 splash",' /etc/default/grub
 	perl -pi -e 's,GRUB_CMDLINE_LINUX="(.*)"$,GRUB_CMDLINE_LINUX="$1 apparmor=1 security=apparmor",' /etc/default/grub
-	plymouth-set-default-theme -R spinner
+	plymouth-set-default-theme -R futureprototype
 	update-grub
-	#Add user to sudo group and disable root
-	usermod -a -G sudo $(cat user)
-	passwd -l root
 fi
 exit 0
