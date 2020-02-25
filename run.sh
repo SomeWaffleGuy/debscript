@@ -1,8 +1,7 @@
 #/bin/sh
 #Scrip with the intention of setting up a custom Debian install from current Stable or Testing iso, may or may not ever actually work
 echo "$(tput setaf 1)$(tput bold)An Internet connection is REQUIRED$(tput sgr 0)"
-echo "$USER" > user
-if [ $(cat user) = root ]
+if [ $USER = root ]
 then
 	echo "$(tput setaf 1)$(tput bold)Must run as non-root user$(tput sgr 0)"
 	exit
