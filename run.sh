@@ -15,8 +15,8 @@ $(tput sgr 0)"
 read answer
 if echo "$answer" | grep -iq "^1" ;then
 	wget https://raw.githubusercontent.com/SomeWaffleGuy/debscript/master/stable.sh
-	chmod +x testing.sh
-	sudo './testing.sh'
+	chmod +x stable.sh
+	sudo './stable.sh'
 elif echo "$answer" | grep -iq "^2" ;then
 	wget https://raw.githubusercontent.com/SomeWaffleGuy/debscript/master/testing.sh
 	chmod +x testing.sh
