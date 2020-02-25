@@ -1,10 +1,12 @@
 #/bin/sh
 #Testing installer/customizer
+echo "$(tput setaf 2)$(tput bold)Uninstalling useless GNOME parts$(tput sgr 0)"
+sleep 3
+	apt purge -y gnome-maps gnome-music gnome-photos gnome-games gnome-documents gnome-weather gnome-dictionary polari shotwell xterm
+	apt autoremove --purge -y
 echo "$(tput setaf 2)$(tput bold)Enabling HTTPS for APT$(tput sgr 0)"
 sleep 3
 	apt install -y apt-transport-https
-echo "$(tput setaf 1)$(tput bold)Make SURE install was successful, script will not function otherwise$(tput sgr 0)"
-read -p "$(tput setaf 2)$(tput bold)Press Enter to continue$(tput sgr 0)"
 echo "$(tput setaf 2)$(tput bold)Modifying sources.list and upgrading$(tput sgr 0)"
 sleep 3
 	echo "# Debian Testing
