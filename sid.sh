@@ -2,7 +2,7 @@
 #Sid installer/customizer
 echo "$(tput setaf 2)$(tput bold)Uninstalling useless GNOME parts$(tput sgr 0)"
 sleep 3
-	apt purge -y gnome-maps gnome-music gnome-photos gnome-games gnome-documents gnome-weather gnome-dictionary polari
+	apt purge -y gnome-maps gnome-music gnome-photos gnome-games gnome-documents gnome-weather gnome-dictionary polari shotwell xterm
 	apt autoremove --purge -y
 echo "$(tput setaf 2)$(tput bold)Enabling HTTPS for APT$(tput sgr 0)"
 sleep 3
