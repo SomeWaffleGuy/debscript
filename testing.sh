@@ -26,7 +26,8 @@ fi
 echo -n "$(tput setaf 2)$(tput bold)Use 12 hour time?$(tput sgr 0) "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
-	echo "clock-format='12h'" >> /etc/gdm3/greeter.dconf-defaults
+	echo "[org/gnome/desktop/interface]
+clock-format='12h'" >> /etc/gdm3/greeter.dconf-defaults
 	echo "true" > 12-hour
 fi
 dpkg-reconfigure gdm3
