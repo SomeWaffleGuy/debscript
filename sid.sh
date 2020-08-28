@@ -151,7 +151,6 @@ $(tput sgr 0)"
 	echo -n "$(tput setaf 2)$(tput bold)Install typical Flatpak applications?$(tput sgr 0) "
 	if echo "$answer" | grep -iq "^y" ;then
 		flatpak install org.gtk.Gtk3theme.Adwaita-dark org.libreoffice.LibreOffice org.gimp.GIMP org.signal.Signal com.discordapp.Discord
-	fi
 elif echo "$answer" | grep -iq "^1" ;then
 	#Install all of the usual things
 	dpkg --add-architecture i386
