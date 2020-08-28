@@ -6,9 +6,9 @@ then
 	echo "$(tput setaf 1)$(tput bold)Must run as non-root user$(tput sgr 0)"
 	exit
 fi
-echo -n "$(tput setaf 2)$(tput bold)Which Debian version do you wish to run? (Most typical Desktop users will likely want Unstable, especially NVIDIA users and gamers)
+echo -n "$(tput setaf 2)$(tput bold)Which Debian version do you wish to run? (Use Unstable for fast updates, beware of potential breakage)
 1: Stable
-2: Ubstable
+2: Unstable
 $(tput sgr 0)"
 #Testing was removed due to being a generally unrecommened version to run on daily use devices. If you still want to install Testing, edit the sources.list for sid.sh and it should MOSTLY work fine.
 read answer
