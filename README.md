@@ -8,3 +8,7 @@ wget https://raw.githubusercontent.com/SomeWaffleGuy/debscript/master/run.sh
 chmod +x run.sh
 ./run.sh
 ```
+
+If you use Fedora (as I do at this point), check out;
+
+https://github.com/SomeWaffleGuy/tippyscript
