@@ -9,6 +9,7 @@ chmod +x run.sh
 ./run.sh
 ```
 
+# Additional Scripts
 If you use Fedora (as I do at this point), check out;
 
 https://github.com/SomeWaffleGuy/tippyscript
