@@ -4,8 +4,8 @@ A horrible script I made for my personal use, customizes a GNOME-based Debian in
 ### Instructions
 
 ```
-wget https://raw.githubusercontent.com/SomeWaffleGuy/debscript/master/run.sh
-chmod +x run.sh
+wget https://raw.githubusercontent.com/SomeWaffleGuy/debscript/master/debscript.sh
+chmod +x debscript.sh
 ./run.sh
 ```
 
