@@ -1,5 +1,11 @@
 # DebScript
-A horrible script I made for my personal use, customizes a GNOME-based Debian install from the netiso. I may or may not ever update this, use it however you want, up to and including mocking its lack of quality. Kinda untested in some ways, so you've been warned. I'd read over it if I were you.
+Messy Debian setup script, massively WIP
+
+Should (mostly) work and provide a basic useable system
+
+ONLY RUN ON XORG (GNOME restart is required to enable/disable settings properly, currently impossible on Wayland)
+
+Wayland can be switched to post-install on supported hardware
 
 ### Instructions
 
@@ -13,3 +19,5 @@ chmod +x debscript.sh
 If you use Fedora (as I do at this point), check out the far higher quality;
 
 https://github.com/SomeWaffleGuy/tippyscript
+
+It includes a README.md with configuration tips helpful for Debian as well.
