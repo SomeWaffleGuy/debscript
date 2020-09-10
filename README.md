@@ -10,6 +10,6 @@ chmod +x run.sh
 ```
 
 # Additional Scripts
-If you use Fedora (as I do at this point), check out;
+If you use Fedora (as I do at this point), check out the far higher quality;
 
 https://github.com/SomeWaffleGuy/tippyscript
