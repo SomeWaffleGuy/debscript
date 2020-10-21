@@ -13,7 +13,7 @@ echo -n "$(tput setaf 2)$(tput bold)Which Debian version do you wish to run? (Us
 $(tput sgr 0)"
 read answer
 if echo "$answer" | grep -iq "^1" ;then
-	sudo echo "# Debian Stable
+	sudo su -c 'echo "# Debian Stable
 deb https://deb.debian.org/debian/ stable main contrib non-free
 #deb-src https://deb.debian.org/debian/ stable main contrib non-free
 
@@ -25,24 +25,25 @@ deb https://deb.debian.org/debian-security stable/updates main contrib non-free
 
 # Backports (Update codename manually for major version changes)
 deb http://ftp.debian.org/debian buster-backports main contrib non-free
-#deb-src http://ftp.debian.org/debian buster-backports main contrib non-free" > /etc/apt/sources.list
+#deb-src http://ftp.debian.org/debian buster-backports main contrib non-free" > /etc/apt/sources.list'
 	sudo apt update
 	sudo apt dist-upgrade -y
 elif echo "$answer" | grep -iq "^2" ;then
-	sudo echo "# Debian Sid
+	sudo su -c 'echo "# Debian Sid
 deb https://deb.debian.org/debian/ sid main contrib non-free
-#deb-src https://deb.debian.org/debian/ sid main contrib non-free" > /etc/apt/sources.list
+#deb-src https://deb.debian.org/debian/ sid main contrib non-free" > /etc/apt/sources.list'
 	sudo apt update
 	sudo apt dist-upgrade -y
 fi
-echo -n "$(tput setaf 2)$(tput bold)Use 12 hour time on GDM?
-(y/N)$(tput sgr 0) "
-read answer
-if echo "$answer" | grep -iq "^y" ;then
-	sudo echo "[org/gnome/desktop/interface]
-clock-format='12h'" >> /etc/gdm3/greeter.dconf-defaults
-fi
-sudo dpkg-reconfigure gdm3
+# 12 hour set cannot work running as user. Suggestions welcome.
+#echo -n "$(tput setaf 2)$(tput bold)Use 12 hour time on GDM?
+#(y/N)$(tput sgr 0) "
+#read answer
+#if echo "$answer" | grep -iq "^y" ;then
+#	sudo echo "[org/gnome/desktop/interface]
+#clock-format='12h'" >> /etc/gdm3/greeter.dconf-defaults
+#fi
+#sudo dpkg-reconfigure gdm3
 echo "$(tput setaf 2)$(tput bold)Installing AppIndicator Extension...(tput sgr 0)"
 sudo apt install -y gnome-shell-extension-appindicator
 echo -n "$(tput setaf 2)$(tput bold)Select Install options
@@ -101,18 +102,18 @@ if echo "$answer" | grep -iq "^2" ;then
 $(tput sgr 0)"
 		read answer
 		if echo "$answer" | grep -iq "^1" ;then
-		echo "# KMS
+		sudo su -c 'echo "# KMS
 intel_agp
 drm
-i915 modeset=1" >> /etc/initramfs-tools/modules
+i915 modeset=1" >> /etc/initramfs-tools/modules'
 		elif echo "$answer" | grep -iq "^2" ;then
-		echo "# KMS
+		sudo su -c 'echo "# KMS
 drm
-radeon modeset=1" >> /etc/initramfs-tools/modules
+radeon modeset=1" >> /etc/initramfs-tools/modules'
 		elif echo "$answer" | grep -iq "^3" ;then
-		echo "# KMS
+		sudo su -c 'echo "# KMS
 drm
-nouveau modeset=1" >> /etc/initramfs-tools/modules
+nouveau modeset=1" >> /etc/initramfs-tools/modules'
 		fi
 	fi
 	echo -n "$(tput setaf 2)$(tput bold)Enable Plymouth?$(tput sgr 0) "
@@ -161,7 +162,6 @@ $(tput sgr 0)"
 		sudo apt install -y flatpak gnome-software-plugin-flatpak
 		sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	fi
-	fi
 elif echo "$answer" | grep -iq "^1" ;then
 	#Install all of the usual things
 	sudo dpkg --add-architecture i386
@@ -202,16 +202,14 @@ nouveau modeset=1" >> /etc/initramfs-tools/modules
 	sudo plymouth-set-default-theme -R futureprototype
 	sudo update-grub
 fi
-echo "$(tput setaf 2)$(tput bold)Restarting GNOME Shell$(tput sgr 0)"
-busctl --user call org.gnome.Shell /org/gnome/Shell org.gnome.Shell Eval s 'Meta.restart("Restarting…")'
-sleep 3
 echo "$(tput setaf 2)$(tput bold)Making GNOME more useable...$(tput sgr 0)"
-gnome-extensions enable appindicatorsupport@rgcjonas.gmail.com
+# Commented  out stuff not currently working in Stable
+#gnome-extensions enable appindicatorsupport@rgcjonas.gmail.com
 gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing 'rgba'
 gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
 gsettings set org.gnome.desktop.interface clock-show-date 'true'
 gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
-gsettings set org.gnome.desktop.interface enable-hot-corners 'false'
+#gsettings set org.gnome.desktop.interface enable-hot-corners 'false'
 gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
 gsettings set org.gnome.desktop.interface clock-format '12h'
 gsettings set org.gnome.nautilus.preferences show-create-link 'true'
