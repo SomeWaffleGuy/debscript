@@ -21,7 +21,9 @@ chmod +x debscriptex.sh
 ```
 
 DebScriptEX violates some principles outlined here;
+
 https://wiki.debian.org/DontBreakDebian
+
 If you are concerned aobut this (although in my experience it has been fine) then avoid using it.
 
 # Additional Scripts
