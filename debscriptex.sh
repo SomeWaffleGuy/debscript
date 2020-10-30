@@ -42,11 +42,11 @@ echo -n "$(tput setaf 2)$(tput bold)Install BlueMaxima's Flashpoint (will also i
 (y/N)$(tput sgr 0) "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
-	sudo apt-get install -y libapache2-mod-php7.3 php php-common php7.3 php7.3-cli php7.3-common php7.3-json php7.3-opcache php7.3-readline
 	wget https://bluepload.unstable.life/selif/flashpoint-infinity-8-2-amd64-deb.7z
 	7z x flashpoint-infinity-8-2-amd64-deb.7z
 	sudo dpkg -i flashpoint*.deb
 	rm flashpoint*.7z flashpoint*.deb
+	sudo apt-get --fix-broken install -y
 	sudo mkdir /opt/flashpoint-infinity
 	sudo chown $(whoami) /opt/flashpoint-infinity
 	echo "$(tput setaf 2)$(tput bold)Flashpoint requires setup on first run. I suggest using the created /opt/flashpoint-infinity for this. Additional configuration is found in /usr/lib/flashpoint-infinity/config.json  $(tput sgr 0) "
