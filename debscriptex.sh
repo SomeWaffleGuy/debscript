@@ -29,6 +29,15 @@ if echo "$answer" | grep -iq "^y" ;then
 	sudo rm google-chrome-stable_current_amd64.deb
 	sudo apt-get --fix-broken install -y
 fi
+echo -n "$(tput setaf 2)$(tput bold)Install Lutris?
+(y/N)$(tput sgr 0) "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+	echo "deb http://download.opensuse.org/repositories/home:/strycore/Debian_10/ ./" | sudo tee /etc/apt/sources.list.d/lutris.list
+	wget -q https://download.opensuse.org/repositories/home:/strycore/Debian_10/Release.key -O- | sudo apt-key add -
+	sudo apt-get update
+	sudo apt-get install -y lutris
+fi
 echo -n "$(tput setaf 2)$(tput bold)Install BlueMaxima's Flashpoint (will also install 32-bit Wine and PHP if not installed)? 
 (y/N)$(tput sgr 0) "
 read answer
