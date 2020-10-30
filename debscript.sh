@@ -1,5 +1,6 @@
 #/bin/bash
 #DebScript: Debian customization script
+#THIS SCRIPT IS EOL, use debscriptv2.sh and debscriptex.sh instead. Provided for modifaction and archival purpose.
 echo "$(tput setaf 2)$(tput bold)Uninstalling useless GNOME parts...$(tput sgr 0)"
 sleep 3
 	sudo apt purge -y gnome-maps gnome-music gnome-photos gnome-games gnome-documents gnome-dictionary polari shotwell xterm libreoffice*
