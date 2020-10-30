@@ -16,8 +16,9 @@ if echo "$answer" | grep -iq "^y" ;then
 	wget https://github.com/SomeWaffleGuy/debscript/raw/master/firefox-equiv.deb
 	sudo dpkg -i firefox-equiv.deb
 	rm firefox-equiv.deb firefox*.tar.bz2
-	sudo apt-get purge firefox-esr
-	sudo apt-get autoremove --purge
+	sudo apt-get -y purge firefox-esr
+	sudo apt-get -y autoremove --purge
+	sudo apt-get -y install libdbus-glib-1-2
 fi
 echo -n "$(tput setaf 2)$(tput bold)Install BlueMaxima's Flashpoint (will also install 32-bit Wine and PHP if not installed)? 
 (y/N)$(tput sgr 0) "
