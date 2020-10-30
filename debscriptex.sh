@@ -20,6 +20,15 @@ if echo "$answer" | grep -iq "^y" ;then
 	sudo apt-get -y autoremove --purge
 	sudo apt-get -y install libdbus-glib-1-2
 fi
+echo -n "$(tput setaf 2)$(tput bold)Install Google Chrome?
+(y/N)$(tput sgr 0) "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+	sudo dpg -i google-chrome-stable_current_amd64.deb
+	sudo rm google-chrome-stable_current_amd64.deb
+	sudo apt-get --fix-broken install -y
+fi
 echo -n "$(tput setaf 2)$(tput bold)Install BlueMaxima's Flashpoint (will also install 32-bit Wine and PHP if not installed)? 
 (y/N)$(tput sgr 0) "
 read answer
@@ -28,12 +37,12 @@ if echo "$answer" | grep -iq "^y" ;then
 	7za e flashpoint-*.7z
 	sudo dpkg -i flashpoint-*.deb
 	rm flashpoint-*.deb flashpoint-*.7z
-	sudo apt-get --fix-broken install
+	sudo apt-get --fix-broken install -y
 	sudo mkdir /opt/flashpoint-infinity
 	sudo chown $(whoami) /opt/flashpoint-infinity
 	echo "$(tput setaf 2)$(tput bold)Flashpoint requires setup on first run, I recommend using the /opt/flashpoint-infinity directory created for this purpose. $(tput sgr 0) "
 fi
-echo -n "$(tput setaf 2)$(tput bold)Install the latest adb/fastboot? 
+echo -n "$(tput setaf 2)$(tput bold)Install latest adb/fastboot? 
 (y/N)$(tput sgr 0) "
 if echo "$answer" | grep -iq "^y" ;then
 	sudo apt-get install git
