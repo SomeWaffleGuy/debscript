@@ -53,6 +53,7 @@ if echo "$answer" | grep -iq "^y" ;then
 fi
 echo -n "$(tput setaf 2)$(tput bold)Install latest adb/fastboot? 
 (y/N)$(tput sgr 0) "
+read answer
 if echo "$answer" | grep -iq "^y" ;then
 	sudo apt-get install git
 	git clone https://github.com/M0Rf30/android-udev-rules.git
@@ -72,12 +73,14 @@ if echo "$answer" | grep -iq "^y" ;then
 fi
 echo -n "$(tput setaf 2)$(tput bold)Install latest youtube-dl? 
 (y/N)$(tput sgr 0) "
+read answer
 if echo "$answer" | grep -iq "^y" ;then
 	sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
 	sudo chmod a+rx /usr/local/bin/youtube-dl
 fi
 echo -n "$(tput setaf 2)$(tput bold)Set Pulseaudio to s32le (Improves quality at slight peformance cost)? 
 (y/N)$(tput sgr 0) "
+read answer
 if echo "$answer" | grep -iq "^y" ;then
 	sudo sed -i "s/; default-sample-format = s16le/default-sample-format = s32le/g" /etc/pulse/daemon.conf
 	sudo sed -i "s/; resample-method = speex-float-1/resample-method = speex-float-10/g" /etc/pulse/daemon.conf
