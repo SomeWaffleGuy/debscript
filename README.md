@@ -12,7 +12,7 @@ chmod +x debscriptv2.sh
 ./debscriptv2.sh
 ```
 
-For additional configuration (Latest Firefox for example), use DebScriptEX
+For additional configuration (Latest Firefox for example), also use DebScriptEX
 
 ```
 wget https://raw.githubusercontent.com/SomeWaffleGuy/debscript/master/debscriptex.sh
