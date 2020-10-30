@@ -12,6 +12,14 @@ chmod +x debscriptv2.sh
 ./debscriptv2.sh
 ```
 
+For additional configuration (Latest Firefox for example), use DebScriptEX
+
+```
+wget https://raw.githubusercontent.com/SomeWaffleGuy/debscript/master/debscriptex.sh
+chmod +x debscriptex.sh
+./debscriptex.sh
+```
+
 # Additional Scripts
 DebScript v1 is provided in this repo for use however you see fit. It is far more clunky but offers options the v2 script does not (Sid install for example) and likely won't outright break anytime soon.
 
