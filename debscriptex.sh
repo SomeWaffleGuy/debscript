@@ -47,7 +47,9 @@ if echo "$answer" | grep -iq "^y" ;then
 	7z x flashpoint-infinity-8-2-amd64-deb.7z
 	sudo dpkg -i flashpoint*.deb
 	rm flashpoint*.7z flashpoint*.deb
-	echo "$(tput setaf 2)$(tput bold)Flashpoint requires setup on first run. $(tput sgr 0) "
+	sudo mkdir /opt/flashpoint-infinity
+	sudo chown $(whoami) /opt/flashpoint-infinity
+	echo "$(tput setaf 2)$(tput bold)Flashpoint requires setup on first run. I suggest using the created /opt/flashpoint-infinity for this. Additional configuration is found in /usr/lib/flashpoint-infinity/config.json  $(tput sgr 0) "
 fi
 echo -n "$(tput setaf 2)$(tput bold)Install latest adb/fastboot? 
 (y/N)$(tput sgr 0) "
