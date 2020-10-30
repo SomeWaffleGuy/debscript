@@ -51,6 +51,12 @@ if echo "$answer" | grep -iq "^y" ;then
 	#Better method of update?
 	echo "$(tput setaf 2)$(tput bold)Use the included adb-updater.sh script to update adb/fastboot as needed. $(tput sgr 0) "
 fi
+echo -n "$(tput setaf 2)$(tput bold)Install latest youtube-dl? 
+(y/N)$(tput sgr 0) "
+if echo "$answer" | grep -iq "^y" ;then
+	sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+	sudo chmod a+rx /usr/local/bin/youtube-dl
+fi
 echo -n "$(tput setaf 2)$(tput bold)Set Pulseaudio to s32le (Improves quality at slight peformance cost)? 
 (y/N)$(tput sgr 0) "
 if echo "$answer" | grep -iq "^y" ;then
