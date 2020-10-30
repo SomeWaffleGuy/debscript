@@ -42,13 +42,14 @@ echo -n "$(tput setaf 2)$(tput bold)Install BlueMaxima's Flashpoint (will also i
 (y/N)$(tput sgr 0) "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
-	wget https://bluepload.unstable.life/selif/flashpoint-infinity-8-2-amd64-deb.7z
-	7za e flashpoint-*.7z
-	sudo dpkg -i flashpoint-*.deb
-	rm flashpoint-*.deb flashpoint-*.7z
-	sudo apt-get --fix-broken install -y
+	sudo apt-get install -y libapache2-mod-php7.3 php php-common php7.3 php7.3-cli php7.3-common php7.3-json php7.3-opcache php7.3-readline
+	wget https://bluepload.unstable.life/selif/flashpoint81infinitylinux.7z
+	7z x flashpoint81infinitylinux.7z
 	sudo mkdir /opt/flashpoint-infinity
 	sudo chown $(whoami) /opt/flashpoint-infinity
+	mv Flashpoint\ 8.1\ Infinity/* /opt/flashpoint-infinity/
+	rm flashpoint*.7z
+	rm -rf Flashpoint\ 8.1\ Infinity
 	echo "$(tput setaf 2)$(tput bold)Flashpoint requires setup on first run, I recommend using the /opt/flashpoint-infinity directory created for this purpose. $(tput sgr 0) "
 fi
 echo -n "$(tput setaf 2)$(tput bold)Install latest adb/fastboot? 
