@@ -42,8 +42,7 @@ deb http://ftp.debian.org/debian buster-backports main contrib non-free
 1: Intel
 2: AMD/ATI
 3: Nvidia w/ Nouveau (Not recommended)
-4: Nvidia w/ proprietary driver
-$(tput sgr 0)"
+4: Nvidia w/ proprietary driver $(tput sgr 0)"
 	read answer
 	if echo "$answer" | grep -iq "^1" ;then
 		sudo apt-get install -y intel-media-va-driver-non-free
